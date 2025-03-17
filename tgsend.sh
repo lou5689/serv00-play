@@ -36,9 +36,6 @@ toTGMsg() {
   local user_icon="👤"
   local time_icon="⏰"
   local notify_icon="📢"
-  local server_icon="🌐"
-  local home_icon="🏠"
-  local panel_icon="📊"
 
   # 获取当前时间
   local current_time=$(date "+%Y-%m-%d %H:%M:%S")
@@ -59,21 +56,11 @@ toTGMsg() {
   local formatted_msg="${title}  \n\n"
   formatted_msg+="${host_icon} *主机：* ${host}  \n"
   formatted_msg+="${user_icon} *用户：* ${user}  \n"
-  formatted_msg+="${server_icon} *SSH/SFTP：* s10.serv00.com  \n"
-  formatted_msg+="${home_icon} *主目录：* /usr/home/sdfsfs  \n"
-  formatted_msg+="${panel_icon} *网页面板：* https://panel10.serv00.com/  \n"
   formatted_msg+="${time_icon} *时间：* ${current_time}  \n\n"
   formatted_msg+="${notify_icon} *通知内容：* ${notify_content}  \n\n"
 
   echo -e "$formatted_msg|${host}|${user}" # 使用 -e 选项以确保换行符生效
 }
-
-# 设置登录信息
-LOGIN="sdfsfs"
-PASSWORD="V5XMkr&lod^foQ7lyPf("
-SSH_SERVER="s10.serv00.com"
-HOME_DIR="/usr/home/sdfsfs"
-WEBPANEL="https://panel10.serv00.com/"
 
 telegramBotToken=8079327972:AAGx0-S-mGCurYiJrZ5LcTVZu7Te-CnwUgU
 telegramBotUserId=1137724729
@@ -83,9 +70,9 @@ host=$(echo "$result" | awk -F'|' '{print $2}')
 user=$(echo "$result" | awk -F'|' '{print $3}')
 
 if [[ "$BUTTON_URL" == "null" ]]; then
-  button_url="$WEBPANEL"
+  button_url="https://www.youtube.com/@frankiejun8965"
 else
-  button_url=${BUTTON_URL:-"$WEBPANEL"}
+  button_url=${BUTTON_URL:-"https://www.youtube.com/@frankiejun8965"}
 fi
 
 URL="https://api.telegram.org/bot${telegramBotToken}/sendMessage"
@@ -96,33 +83,19 @@ fi
 if [[ -n "$user" ]]; then
   button_url=$(replaceValue $button_url USER $user)
 fi
-if [[ -n "$PASSWORD" ]]; then
-  pass=$(toBase64 $PASSWORD)
+if [[ -n "$PASS" ]]; then
+  pass=$(toBase64 $PASS)
   button_url=$(replaceValue $button_url PASS $pass)
 fi
-if [[ -n "$HOME_DIR" ]]; then
-  button_url=$(replaceValue $button_url HOME $HOME_DIR)
-fi
-if [[ -n "$SSH_SERVER" ]]; then
-  button_url=$(replaceValue $button_url SSH $SSH_SERVER)
-fi
-
 encoded_url=$(urlencode "$button_url")
 #echo "encoded_url: $encoded_url"
-
-# 创建多个按钮
 reply_markup='{
     "inline_keyboard": [
       [
-        {"text": "登录面板", "url": "'"${WEBPANEL}"'"}
-      ],
-      [
-        {"text": "SSH连接", "url": "ssh://'"${LOGIN}"'@'"${SSH_SERVER}"'"},
-        {"text": "SFTP连接", "url": "sftp://'"${LOGIN}"'@'"${SSH_SERVER}"'"}
+        {"text": "点击查看", "url": "'"${encoded_url}"'"}
       ]
     ]
   }'
-
 #echo "reply_markup: $reply_markup"
 #echo "telegramBotToken:$telegramBotToken,telegramBotUserId:$telegramBotUserId"
 if [[ -z ${telegramBotToken} ]]; then
