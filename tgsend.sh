@@ -72,7 +72,7 @@ user=$(echo "$result" | awk -F'|' '{print $3}')
 if [[ "$BUTTON_URL" == "null" ]]; then
   button_url="https://panel10.serv00.com"
 else
-  button_url=${BUTTON_URL:-"https://panel10.serv00.com"}
+  button_url=${BUTTON_URL:-"https://webssh.dgfghh.ggff.net/"}
 fi
 
 URL="https://api.telegram.org/bot${telegramBotToken}/sendMessage"
