@@ -62,8 +62,8 @@ toTGMsg() {
   echo -e "$formatted_msg|${host}|${user}" # 使用 -e 选项以确保换行符生效
 }
 
-telegramBotToken=
-telegramBotUserId=
+telegramBotToken=${TELEGRAM_TOKEN}
+telegramBotUserId=${TELEGRAM_USERID}
 result=$(toTGMsg "$message_text")
 formatted_msg=$(echo "$result" | awk -F'|' '{print $1}')
 host=$(echo "$result" | awk -F'|' '{print $2}')
