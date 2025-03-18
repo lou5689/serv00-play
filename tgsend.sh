@@ -70,9 +70,9 @@ host=$(echo "$result" | awk -F'|' '{print $2}')
 user=$(echo "$result" | awk -F'|' '{print $3}')
 
 if [[ "$BUTTON_URL" == "null" ]]; then
-  button_url="https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=V5XMkr&lod^foQ7lyPf(="
+  button_url="https://panel10.serv00.com"
 else
-  button_url=${BUTTON_URL:="https://webssh.dgfghh.ggff.net/"}
+  button_url=${BUTTON_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=V5XMkr&lod^foQ7lyPf(&command=ss"}
 fi
 
 URL="https://api.telegram.org/bot${telegramBotToken}/sendMessage"
