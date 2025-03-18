@@ -70,7 +70,7 @@ host=$(echo "$result" | awk -F'|' '{print $2}')
 user=$(echo "$result" | awk -F'|' '{print $3}')
 
 if [[ "$BUTTON_URL" == "null" ]]; then
-  button_url="https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=V5XMkr&lod^foQ7lyPf(&command=ss"
+  button_url="https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=V5XMkr&lod^foQ7lyPf(="
 else
   button_url=${BUTTON_URL:="https://webssh.dgfghh.ggff.net/"}
 fi
