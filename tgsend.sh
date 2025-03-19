@@ -72,7 +72,7 @@ user=$(echo "$result" | awk -F'|' '{print $3}')
 if [[ "$BUTTON_URL" == "null" ]]; then
   button_url="https://panel10.serv00.com"
 else
-  button_url=${BUTTON_URL:-"https://panel10.serv00.com"}
+  button_url=${BUTTON_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
 fi
 
 # 添加Telegraph链接
@@ -82,28 +82,39 @@ else
   telegraph_url=${TELEGRAPH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
 fi
 
+# 添加第三个按钮链接
+if [[ "$THIRD_BUTTON_URL" == "null" ]]; then
+  third_button_url="https://status.serv00.com/#HOST"
+else
+  third_button_url=${THIRD_BUTTON_URL:-"https://status.serv00.com/#HOST"}
+fi
+
 URL="https://api.telegram.org/bot${telegramBotToken}/sendMessage"
 
-# 只处理一次URL替换
+# 处理URL替换
 if [[ -n "$host" ]]; then
   button_url=$(replaceValue $button_url HOST $host)
   telegraph_url=$(replaceValue $telegraph_url HOST $host)
+  third_button_url=$(replaceValue $third_button_url HOST $host)
 fi
 if [[ -n "$user" ]]; then
   button_url=$(replaceValue $button_url USER $user)
   telegraph_url=$(replaceValue $telegraph_url USER $user)
+  third_button_url=$(replaceValue $third_button_url USER $user)
 fi
 if [[ -n "$PASS" ]]; then
   pass=$(toBase64 $PASS)
   button_url=$(replaceValue $button_url PASS $pass)
   telegraph_url=$(replaceValue $telegraph_url PASS $pass)
+  third_button_url=$(replaceValue $third_button_url PASS $pass)
 fi
 
 # 编码URL
 encoded_url=$(urlencode "$button_url")
 encoded_telegraph=$(urlencode "$telegraph_url")
+encoded_third_button=$(urlencode "$third_button_url")
 
-# 只定义一次reply_markup
+# 定义三个按钮的reply_markup
 reply_markup='{
     "inline_keyboard": [
       [
@@ -111,6 +122,9 @@ reply_markup='{
       ],
       [
         {"text": "打开Terminal", "url": "'"${encoded_telegraph}"'"}
+      ],
+      [
+        {"text": "查看状态", "url": "'"${encoded_third_button}"'"}
       ]
     ]
   }'
@@ -118,6 +132,7 @@ reply_markup='{
 # 调试信息
 echo "第一个按钮URL: $encoded_url"
 echo "第二个按钮URL: $encoded_telegraph"
+echo "第三个按钮URL: $encoded_third_button"
 echo "按钮结构: $reply_markup"
 
 if [[ -z ${telegramBotToken} ]]; then
