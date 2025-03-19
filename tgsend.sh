@@ -81,7 +81,34 @@ if [[ "$TELEGRAPH_URL" == "null" ]]; then
 else
   telegraph_url=${TELEGRAPH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
 fi
+if [[ -n "$host" ]]; then
+  button_url=$(replaceValue $button_url HOST $host)
+  telegraph_url=$(replaceValue $telegraph_url HOST $host)  # 添加这行
+fi
+if [[ -n "$user" ]]; then
+  button_url=$(replaceValue $button_url USER $user)
+  telegraph_url=$(replaceValue $telegraph_url USER $user)  # 添加这行
+fi
+if [[ -n "$PASS" ]]; then
+  pass=$(toBase64 $PASS)
+  button_url=$(replaceValue $button_url PASS $pass)
+  telegraph_url=$(replaceValue $telegraph_url PASS $pass)  # 添加这行
+fi
 
+encoded_url=$(urlencode "$button_url")
+encoded_telegraph=$(urlencode "$telegraph_url")  # 添加这行
+
+# 更新reply_markup，添加第二个按钮
+reply_markup='{
+    "inline_keyboard": [
+      [
+        {"text": "点击查看", "url": "'"${encoded_url}"'"}
+      ],
+      [
+        {"text": "打开Terminal", "url": "'"${encoded_telegraph}"'"}
+      ]
+    ]
+  }'
 URL="https://api.telegram.org/bot${telegramBotToken}/sendMessage"
 
 if [[ -n "$host" ]]; then
