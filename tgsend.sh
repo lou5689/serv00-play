@@ -118,13 +118,13 @@ encoded_third_button=$(urlencode "$third_button_url")
 reply_markup='{
     "inline_keyboard": [
       [
-        {"text": "点击查看", "url": "'"${encoded_url}"'"}
+        {"text": "打开serv00官网", "url": "'"${encoded_url}"'"}
       ],
       [
-        {"text": "打开Terminal", "url": "'"${encoded_telegraph}"'"}
+        {"text": "打开webssh快速登入", "url": "'"${encoded_telegraph}"'"}
       ],
       [
-        {"text": "查看状态", "url": "'"${encoded_third_button}"'"}
+        {"text": "备用", "url": "'"${encoded_third_button}"'"}
       ]
     ]
   }'
