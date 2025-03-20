@@ -69,118 +69,103 @@ formatted_msg=$(echo "$result" | awk -F'|' '{print $1}')
 host=$(echo "$result" | awk -F'|' '{print $2}')
 user=$(echo "$result" | awk -F'|' '{print $3}')
 
-# 定义所有按钮的URL
-if [[ "$BUTTON_URL" == "null" ]]; then
-  button_url="https://panel10.serv00.com"
-else
-  button_url=${BUTTON_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
+# 定义各个按钮的默认URL
+button_url=${BUTTON_URL:-"https://panel10.serv00.com"}
+telegraph_url=${TELEGRAPH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
+new_user_url=${NEW_USER_URL:-"https://serv00.com/newuser"}
+webssh_url=${WEBSSH_URL:-"https://serv00.com/search"}
+serv00_url=${SERV00_URL:-"https://serv00.com"}
+bwh_url=${BWH_URL:-"https://bandwagonhost.com"}
+bwh_special_url=${BWH_SPECIAL_URL:-"https://bwh81.net/cart.php"}
+bwh_kvm_url=${BWH_KVM_URL:-"https://bwh88.net"}
+nezha_url=${NEZHA_URL:-"https://nezha.sh"}
+tianya_url=${TIANYA_URL:-"https://serv00.com/order"}
+
+# URL替换逻辑
+if [[ -n "$host" ]]; then
+  button_url=$(replaceValue "$button_url" HOST "$host")
+  telegraph_url=$(replaceValue "$telegraph_url" HOST "$host")
+  new_user_url=$(replaceValue "$new_user_url" HOST "$host")
+  webssh_url=$(replaceValue "$webssh_url" HOST "$host")
+  serv00_url=$(replaceValue "$serv00_url" HOST "$host")
+  bwh_url=$(replaceValue "$bwh_url" HOST "$host")
+  bwh_special_url=$(replaceValue "$bwh_special_url" HOST "$host")
+  bwh_kvm_url=$(replaceValue "$bwh_kvm_url" HOST "$host")
+  nezha_url=$(replaceValue "$nezha_url" HOST "$host")
+  tianya_url=$(replaceValue "$tianya_url" HOST "$host")
 fi
 
-if [[ "$TELEGRAPH_URL" == "null" ]]; then
-  telegraph_url="https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"
-else
-  telegraph_url=${TELEGRAPH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
+if [[ -n "$user" ]]; then
+  button_url=$(replaceValue "$button_url" USER "$user")
+  telegraph_url=$(replaceValue "$telegraph_url" USER "$user")
+  new_user_url=$(replaceValue "$new_user_url" USER "$user")
+  webssh_url=$(replaceValue "$webssh_url" USER "$user")
+  serv00_url=$(replaceValue "$serv00_url" USER "$user")
+  bwh_url=$(replaceValue "$bwh_url" USER "$user")
+  bwh_special_url=$(replaceValue "$bwh_special_url" USER "$user")
+  bwh_kvm_url=$(replaceValue "$bwh_kvm_url" USER "$user")
+  nezha_url=$(replaceValue "$nezha_url" USER "$user")
+  tianya_url=$(replaceValue "$tianya_url" USER "$user")
 fi
 
-if [[ "$NEW_USER_URL" == "null" ]]; then
-  new_user_url="https://serv00.com/newuser"
-else
-  new_user_url=${NEW_USER_URL:-"https://serv00.com/newuser"}
+if [[ -n "$PASS" ]]; then
+  pass=$(toBase64 "$PASS")
+  button_url=$(replaceValue "$button_url" PASS "$pass")
+  telegraph_url=$(replaceValue "$telegraph_url" PASS "$pass")
+  new_user_url=$(replaceValue "$new_user_url" PASS "$pass")
+  webssh_url=$(replaceValue "$webssh_url" PASS "$pass")
+  serv00_url=$(replaceValue "$serv00_url" PASS "$pass")
+  bwh_url=$(replaceValue "$bwh_url" PASS "$pass")
+  bwh_special_url=$(replaceValue "$bwh_special_url" PASS "$pass")
+  bwh_kvm_url=$(replaceValue "$bwh_kvm_url" PASS "$pass")
+  nezha_url=$(replaceValue "$nezha_url" PASS "$pass")
+  tianya_url=$(replaceValue "$tianya_url" PASS "$pass")
 fi
 
-if [[ "$ADVANCED_SEARCH_URL" == "null" ]]; then
-  advanced_search_url="https://serv00.com/search"
-else
-  advanced_search_url=${ADVANCED_SEARCH_URL:-"https://serv00.com/search"}
-fi
+# URL编码
+button_url_encoded=$(urlencode "$button_url")
+telegraph_url_encoded=$(urlencode "$telegraph_url")
+new_user_url_encoded=$(urlencode "$new_user_url")
+webssh_url_encoded=$(urlencode "$webssh_url")
+serv00_url_encoded=$(urlencode "$serv00_url")
+bwh_url_encoded=$(urlencode "$bwh_url")
+bwh_special_url_encoded=$(urlencode "$bwh_special_url")
+bwh_kvm_url_encoded=$(urlencode "$bwh_kvm_url")
+nezha_url_encoded=$(urlencode "$nezha_url")
+tianya_url_encoded=$(urlencode "$tianya_url")
 
-if [[ "$VRAY_CLIENT_URL" == "null" ]]; then
-  vray_client_url="https://serv00.com/vray"
-else
-  vray_client_url=${VRAY_CLIENT_URL:-"https://serv00.com/vray"}
-fi
-
-if [[ "$CLASH_CLIENT_URL" == "null" ]]; then
-  clash_client_url="https://serv00.com/clash"
-else
-  clash_client_url=${CLASH_CLIENT_URL:-"https://serv00.com/clash"}
-fi
-
-if [[ "$MIHOMO_CLIENT_URL" == "null" ]]; then
-  mihomo_client_url="https://serv00.com/mihomo"
-else
-  mihomo_client_url=${MIHOMO_CLIENT_URL:-"https://serv00.com/mihomo"}
-fi
-
-if [[ "$SINGBOX_CLIENT_URL" == "null" ]]; then
-  singbox_client_url="https://serv00.com/singbox"
-else
-  singbox_client_url=${SINGBOX_CLIENT_URL:-"https://serv00.com/singbox"}
-fi
-
-if [[ "$WORKERS_PAGES_URL" == "null" ]]; then
-  workers_pages_url="https://serv00.com/workers"
-else
-  workers_pages_url=${WORKERS_PAGES_URL:-"https://serv00.com/workers"}
-fi
-
-if [[ "$ORDER_STATUS_URL" == "null" ]]; then
-  order_status_url="https://serv00.com/order"
-else
-  order_status_url=${ORDER_STATUS_URL:-"https://serv00.com/order"}
-fi
-
-URL="https://api.telegram.org/bot${telegramBotToken}/sendMessage"
-
-# 处理所有URL的替换
-for url_var in button_url telegraph_url new_user_url advanced_search_url vray_client_url clash_client_url mihomo_client_url singbox_client_url workers_pages_url order_status_url; do
-  if [[ -n "$host" ]]; then
-    eval "$url_var=\$(replaceValue \$$url_var HOST \$host)"
-  fi
-  if [[ -n "$user" ]]; then
-    eval "$url_var=\$(replaceValue \$$url_var USER \$user)"
-  fi
-  if [[ -n "$PASS" ]]; then
-    pass=$(toBase64 $PASS)
-    eval "$url_var=\$(replaceValue \$$url_var PASS \$pass)"
-  fi
-  # 编码URL
-  encoded_var="${url_var}_encoded"
-  eval "$encoded_var=\$(urlencode \$$url_var)"
-done
-
-# 定义多按钮网格布局的reply_markup
+# 构建按钮布局 - 使用单引号包裹整个JSON，内部使用双引号
 reply_markup='{
     "inline_keyboard": [
       [
-        {"text": "✨ serv00快速登入 ✨", "url": "'"${new_user_url_encoded}"'"}
+        {"text": "✨ serv00快速登入 ✨", "url": "'"$new_user_url_encoded"'"}
       ],
       [
-        {"text": "✨ webssh快速登入 ✨", "url": "'"${advanced_search_url_encoded}"'"}
+        {"text": "✨ webssh快速登入 ✨", "url": "'"$webssh_url_encoded"'"}
       ],
       [
-        {"text": "serv00官网", "url": "'"${vray_client_url_encoded}"'"},
-        {"text": "搬瓦工官网", "url": "'"${clash_client_url_encoded}"'"}
+        {"text": "serv00官网", "url": "'"$serv00_url_encoded"'"},
+        {"text": "搬瓦工官网", "url": "'"$bwh_url_encoded"'"}
       ],
       [
-        {"text": "搬瓦工特价面板", "url": "'"${mihomo_client_url_encoded}"'"},
-        {"text": "搬瓦工KVM面板", "url": "'"${singbox_client_url_encoded}"'"}
+        {"text": "搬瓦工特价面板", "url": "'"$bwh_special_url_encoded"'"},
+        {"text": "搬瓦工KVM面板", "url": "'"$bwh_kvm_url_encoded"'"}
       ],
       [
-        {"text": "✨ 哪吒面板 ✨", "url": "'"${workers_pages_url_encoded}"'"}
+        {"text": "✨ 哪吒面板 ✨", "url": "'"$nezha_url_encoded"'"}
       ],
       [
-        {"text": "天涯在线订阅层", "url": "'"${order_status_url_encoded}"'"}
+        {"text": "天涯在线订阅层", "url": "'"$tianya_url_encoded"'"}
       ],
       [
-        {"text": "点击查看", "url": "'"${button_url_encoded}"'"}
+        {"text": "点击查看", "url": "'"$button_url_encoded"'"}
       ],
       [
-        {"text": "打开Terminal", "url": "'"${telegraph_url_encoded}"'"}
+        {"text": "打开Terminal", "url": "'"$telegraph_url_encoded"'"}
       ]
     ]
   }'
-  
+
 # 调试信息
 echo "按钮结构: $reply_markup"
 
@@ -192,10 +177,12 @@ else
     -d parse_mode="Markdown" \
     -d text="$formatted_msg" \
     -d reply_markup="$reply_markup")
-  if [ $? == 124 ]; then
+  
+  if [ $? -eq 124 ]; then
     echo 'TG_api请求超时,请检查网络是否重启完成并是否能够访问TG'
     exit 1
   fi
+  
   #echo "res:$res"
   resSuccess=$(echo "$res" | jq -r ".ok")
   if [[ $resSuccess = "true" ]]; then
@@ -204,4 +191,4 @@ else
     echo "TG推送失败，请检查TG机器人token和ID"
     echo "错误信息: $res"
   fi
-f
+fi
