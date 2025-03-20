@@ -70,7 +70,7 @@ host=$(echo "$result" | awk -F'|' '{print $2}')
 user=$(echo "$result" | awk -F'|' '{print $3}')
 
 # 定义各个按钮的默认URL
-button_url=${BUTTON_URL:-"https://tcp.ping.pe"}
+button_url=${BUTTON_URL:-"https://panel10.serv00.com"}
 telegraph_url=${TELEGRAPH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
 new_user_url=${NEW_USER_URL:-"https://panel10.serv00.com"}
 webssh_url=${WEBSSH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
@@ -80,6 +80,8 @@ bwh_special_url=${BWH_SPECIAL_URL:-"https://bwh81.net/cart.php"}
 bwh_kvm_url=${BWH_KVM_URL:-"https://bwh88.net"}
 nezha_url=${NEZHA_URL:-"https://nezha.cmliussss.com/"}
 tianya_url=${TIANYA_URL:-"https://status.eooce.com"}
+# 新增 TCP ping URL，用于IP排查
+tcp_ping_url="https://tcp.ping.pe"
 
 # 确保按钮URL不为空，设置默认值
 # 检查BUTTON_URL是否为null或空，设置默认值
@@ -99,6 +101,7 @@ if [[ -n "$host" ]]; then
   bwh_kvm_url=$(replaceValue "$bwh_kvm_url" HOST "$host")
   nezha_url=$(replaceValue "$nezha_url" HOST "$host")
   tianya_url=$(replaceValue "$tianya_url" HOST "$host")
+  tcp_ping_url=$(replaceValue "$tcp_ping_url" HOST "$host")
 fi
 
 if [[ -n "$user" ]]; then
@@ -112,6 +115,7 @@ if [[ -n "$user" ]]; then
   bwh_kvm_url=$(replaceValue "$bwh_kvm_url" USER "$user")
   nezha_url=$(replaceValue "$nezha_url" USER "$user")
   tianya_url=$(replaceValue "$tianya_url" USER "$user")
+  tcp_ping_url=$(replaceValue "$tcp_ping_url" USER "$user")
 fi
 
 if [[ -n "$PASS" ]]; then
@@ -126,6 +130,7 @@ if [[ -n "$PASS" ]]; then
   bwh_kvm_url=$(replaceValue "$bwh_kvm_url" PASS "$pass")
   nezha_url=$(replaceValue "$nezha_url" PASS "$pass")
   tianya_url=$(replaceValue "$tianya_url" PASS "$pass")
+  tcp_ping_url=$(replaceValue "$tcp_ping_url" PASS "$pass")
 fi
 
 # URL编码，确保不会有null值
@@ -139,6 +144,7 @@ bwh_special_url_encoded=$(urlencode "$bwh_special_url")
 bwh_kvm_url_encoded=$(urlencode "$bwh_kvm_url")
 nezha_url_encoded=$(urlencode "$nezha_url")
 tianya_url_encoded=$(urlencode "$tianya_url")
+tcp_ping_url_encoded=$(urlencode "$tcp_ping_url")
 
 # 检查按钮URL是否为null，如果是则使用默认URL
 if [[ "$button_url_encoded" == "null" ]]; then
@@ -169,7 +175,7 @@ reply_markup='{
         {"text": "Serv00 主机状态查询", "url": "'"$tianya_url_encoded"'"}
       ],
       [
-        {"text": "✨ 搬瓦工IP排查故障 ✨", "url": "'"$button_url_encoded"'"}
+        {"text": "✨ 搬瓦工IP排查故障 ✨", "url": "'"$tcp_ping_url_encoded"'"}
       ],
       [
         {"text": "打开Terminal", "url": "'"$telegraph_url_encoded"'"}
