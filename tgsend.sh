@@ -79,7 +79,7 @@ bwh_url=${BWH_URL:-"https://bandwagonhost.com/clientarea.php"}
 bwh_special_url=${BWH_SPECIAL_URL:-"https://bwh81.net/cart.php"}
 bwh_kvm_url=${BWH_KVM_URL:-"https://bwh88.net"}
 nezha_url=${NEZHA_URL:-"https://nezha.cmliussss.com/"}
-tianya_url=${TIANYA_URL:-"https://serv00.com/order"}
+tianya_url=${TIANYA_URL:-"https://status.eooce.com"}
 
 # 确保按钮URL不为空，设置默认值
 # 检查BUTTON_URL是否为null或空，设置默认值
@@ -166,7 +166,7 @@ reply_markup='{
         {"text": "✨ 哪吒面板 ✨", "url": "'"$nezha_url_encoded"'"}
       ],
       [
-        {"text": "天涯在线订阅层", "url": "'"$tianya_url_encoded"'"}
+        {"text": "Serv00 主机状态查询", "url": "'"$tianya_url_encoded"'"}
       ],
       [
         {"text": "点击查看", "url": "'"$button_url_encoded"'"}
