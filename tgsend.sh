@@ -180,7 +180,7 @@ reply_markup='{
       ]
     ]
   }'
-
+  
 # 调试信息
 echo "按钮结构: $reply_markup"
 
