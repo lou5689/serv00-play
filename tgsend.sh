@@ -69,70 +69,119 @@ formatted_msg=$(echo "$result" | awk -F'|' '{print $1}')
 host=$(echo "$result" | awk -F'|' '{print $2}')
 user=$(echo "$result" | awk -F'|' '{print $3}')
 
+# 定义所有按钮的URL
 if [[ "$BUTTON_URL" == "null" ]]; then
   button_url="https://panel10.serv00.com"
 else
   button_url=${BUTTON_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
 fi
 
-# 添加Telegraph链接
 if [[ "$TELEGRAPH_URL" == "null" ]]; then
   telegraph_url="https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"
 else
   telegraph_url=${TELEGRAPH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
 fi
 
-# 添加第三个按钮链接
-if [[ "$THIRD_BUTTON_URL" == "null" ]]; then
-  third_button_url="https://status.serv00.com/#HOST"
+if [[ "$NEW_USER_URL" == "null" ]]; then
+  new_user_url="https://serv00.com/newuser"
 else
-  third_button_url=${THIRD_BUTTON_URL:-"https://status.serv00.com/#HOST"}
+  new_user_url=${NEW_USER_URL:-"https://serv00.com/newuser"}
+fi
+
+if [[ "$ADVANCED_SEARCH_URL" == "null" ]]; then
+  advanced_search_url="https://serv00.com/search"
+else
+  advanced_search_url=${ADVANCED_SEARCH_URL:-"https://serv00.com/search"}
+fi
+
+if [[ "$VRAY_CLIENT_URL" == "null" ]]; then
+  vray_client_url="https://serv00.com/vray"
+else
+  vray_client_url=${VRAY_CLIENT_URL:-"https://serv00.com/vray"}
+fi
+
+if [[ "$CLASH_CLIENT_URL" == "null" ]]; then
+  clash_client_url="https://serv00.com/clash"
+else
+  clash_client_url=${CLASH_CLIENT_URL:-"https://serv00.com/clash"}
+fi
+
+if [[ "$MIHOMO_CLIENT_URL" == "null" ]]; then
+  mihomo_client_url="https://serv00.com/mihomo"
+else
+  mihomo_client_url=${MIHOMO_CLIENT_URL:-"https://serv00.com/mihomo"}
+fi
+
+if [[ "$SINGBOX_CLIENT_URL" == "null" ]]; then
+  singbox_client_url="https://serv00.com/singbox"
+else
+  singbox_client_url=${SINGBOX_CLIENT_URL:-"https://serv00.com/singbox"}
+fi
+
+if [[ "$WORKERS_PAGES_URL" == "null" ]]; then
+  workers_pages_url="https://serv00.com/workers"
+else
+  workers_pages_url=${WORKERS_PAGES_URL:-"https://serv00.com/workers"}
+fi
+
+if [[ "$ORDER_STATUS_URL" == "null" ]]; then
+  order_status_url="https://serv00.com/order"
+else
+  order_status_url=${ORDER_STATUS_URL:-"https://serv00.com/order"}
 fi
 
 URL="https://api.telegram.org/bot${telegramBotToken}/sendMessage"
 
-# 处理URL替换
-if [[ -n "$host" ]]; then
-  button_url=$(replaceValue $button_url HOST $host)
-  telegraph_url=$(replaceValue $telegraph_url HOST $host)
-  third_button_url=$(replaceValue $third_button_url HOST $host)
-fi
-if [[ -n "$user" ]]; then
-  button_url=$(replaceValue $button_url USER $user)
-  telegraph_url=$(replaceValue $telegraph_url USER $user)
-  third_button_url=$(replaceValue $third_button_url USER $user)
-fi
-if [[ -n "$PASS" ]]; then
-  pass=$(toBase64 $PASS)
-  button_url=$(replaceValue $button_url PASS $pass)
-  telegraph_url=$(replaceValue $telegraph_url PASS $pass)
-  third_button_url=$(replaceValue $third_button_url PASS $pass)
-fi
+# 处理所有URL的替换
+for url_var in button_url telegraph_url new_user_url advanced_search_url vray_client_url clash_client_url mihomo_client_url singbox_client_url workers_pages_url order_status_url; do
+  if [[ -n "$host" ]]; then
+    eval "$url_var=\$(replaceValue \$$url_var HOST \$host)"
+  fi
+  if [[ -n "$user" ]]; then
+    eval "$url_var=\$(replaceValue \$$url_var USER \$user)"
+  fi
+  if [[ -n "$PASS" ]]; then
+    pass=$(toBase64 $PASS)
+    eval "$url_var=\$(replaceValue \$$url_var PASS \$pass)"
+  fi
+  # 编码URL
+  encoded_var="${url_var}_encoded"
+  eval "$encoded_var=\$(urlencode \$$url_var)"
+done
 
-# 编码URL
-encoded_url=$(urlencode "$button_url")
-encoded_telegraph=$(urlencode "$telegraph_url")
-encoded_third_button=$(urlencode "$third_button_url")
-
-# 定义三个按钮的reply_markup
+# 定义多按钮网格布局的reply_markup
 reply_markup='{
     "inline_keyboard": [
       [
-        {"text": "打开serv00官网", "url": "'"${encoded_url}"'"}
+        {"text": "✨ serv00快速登入 ✨", "url": "'"${new_user_url_encoded}"'"}
       ],
       [
-        {"text": "打开webssh快速登入", "url": "'"${encoded_telegraph}"'"}
+        {"text": "✨ webssh快速登入 ✨", "url": "'"${advanced_search_url_encoded}"'"}
       ],
       [
-        {"text": "备用", "url": "'"${encoded_third_button}"'"}
+        {"text": "serv00官网", "url": "'"${vray_client_url_encoded}"'"},
+        {"text": "搬瓦工官网", "url": "'"${clash_client_url_encoded}"'"}
+      ],
+      [
+        {"text": "搬瓦工特价面板", "url": "'"${mihomo_client_url_encoded}"'"},
+        {"text": "搬瓦工KVM面板", "url": "'"${singbox_client_url_encoded}"'"}
+      ],
+      [
+        {"text": "✨ 哪吒面板 ✨", "url": "'"${workers_pages_url_encoded}"'"}
+      ],
+      [
+        {"text": "天涯在线订阅层", "url": "'"${order_status_url_encoded}"'"}
+      ],
+      [
+        {"text": "点击查看", "url": "'"${button_url_encoded}"'"}
+      ],
+      [
+        {"text": "打开Terminal", "url": "'"${telegraph_url_encoded}"'"}
       ]
     ]
   }'
 
 # 调试信息
-echo "第一个按钮URL: $encoded_url"
-echo "第二个按钮URL: $encoded_telegraph"
-echo "第三个按钮URL: $encoded_third_button"
 echo "按钮结构: $reply_markup"
 
 if [[ -z ${telegramBotToken} ]]; then
@@ -155,4 +204,4 @@ else
     echo "TG推送失败，请检查TG机器人token和ID"
     echo "错误信息: $res"
   fi
-fi
+f
