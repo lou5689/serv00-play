@@ -72,13 +72,13 @@ user=$(echo "$result" | awk -F'|' '{print $3}')
 # 定义各个按钮的默认URL
 button_url=${BUTTON_URL:-"https://panel10.serv00.com"}
 telegraph_url=${TELEGRAPH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
-new_user_url=${NEW_USER_URL:-"https://serv00.com/newuser"}
-webssh_url=${WEBSSH_URL:-"https://serv00.com/search"}
+new_user_url=${NEW_USER_URL:-"https://panel10.serv00.com"}
+webssh_url=${WEBSSH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
 serv00_url=${SERV00_URL:-"https://serv00.com"}
-bwh_url=${BWH_URL:-"https://bandwagonhost.com"}
+bwh_url=${BWH_URL:-"https://bandwagonhost.com/clientarea.php"}
 bwh_special_url=${BWH_SPECIAL_URL:-"https://bwh81.net/cart.php"}
 bwh_kvm_url=${BWH_KVM_URL:-"https://bwh88.net"}
-nezha_url=${NEZHA_URL:-"https://nezha.sh"}
+nezha_url=${NEZHA_URL:-"https://nezha.cmliussss.com/"}
 tianya_url=${TIANYA_URL:-"https://serv00.com/order"}
 
 # 确保按钮URL不为空，设置默认值
