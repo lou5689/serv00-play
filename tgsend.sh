@@ -169,7 +169,7 @@ reply_markup='{
         {"text": "Serv00 主机状态查询", "url": "'"$tianya_url_encoded"'"}
       ],
       [
-        {"text": "点击查看", "url": "'"$button_url_encoded"'"}
+        {"text": "✨ 搬瓦工IP排查故障 ✨", "url": "'"$button_url_encoded"'"}
       ],
       [
         {"text": "打开Terminal", "url": "'"$telegraph_url_encoded"'"}
