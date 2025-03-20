@@ -81,6 +81,12 @@ bwh_kvm_url=${BWH_KVM_URL:-"https://bwh88.net"}
 nezha_url=${NEZHA_URL:-"https://nezha.sh"}
 tianya_url=${TIANYA_URL:-"https://serv00.com/order"}
 
+# 确保按钮URL不为空，设置默认值
+# 检查BUTTON_URL是否为null或空，设置默认值
+if [[ -z "$button_url" || "$button_url" == "null" ]]; then
+  button_url="https://serv00.com"  # 设置默认URL
+fi
+
 # URL替换逻辑
 if [[ -n "$host" ]]; then
   button_url=$(replaceValue "$button_url" HOST "$host")
@@ -122,7 +128,7 @@ if [[ -n "$PASS" ]]; then
   tianya_url=$(replaceValue "$tianya_url" PASS "$pass")
 fi
 
-# URL编码
+# URL编码，确保不会有null值
 button_url_encoded=$(urlencode "$button_url")
 telegraph_url_encoded=$(urlencode "$telegraph_url")
 new_user_url_encoded=$(urlencode "$new_user_url")
@@ -133,6 +139,11 @@ bwh_special_url_encoded=$(urlencode "$bwh_special_url")
 bwh_kvm_url_encoded=$(urlencode "$bwh_kvm_url")
 nezha_url_encoded=$(urlencode "$nezha_url")
 tianya_url_encoded=$(urlencode "$tianya_url")
+
+# 检查按钮URL是否为null，如果是则使用默认URL
+if [[ "$button_url_encoded" == "null" ]]; then
+  button_url_encoded=$(urlencode "https://serv00.com")
+fi
 
 # 构建按钮布局 - 使用单引号包裹整个JSON，内部使用双引号
 reply_markup='{
