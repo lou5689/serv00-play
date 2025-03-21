@@ -78,7 +78,7 @@ serv00_url=${SERV00_URL:-"https://serv00.com"}
 bwh_url=${BWH_URL:-"https://bandwagonhost.com/clientarea.php"}
 bwh_special_url=${BWH_SPECIAL_URL:-"https://bwh81.net/cart.php"}
 bwh_kvm_url=${BWH_KVM_URL:-"https://bwh88.net"}
-nezha_url=${NEZHA_URL:-"https://nezha.cmliussss.com/"}
+nezha_url=${NEZHA_URL:-"https://nazha.dgfghh.ggff.net/"}
 tianya_url=${TIANYA_URL:-"https://status.eooce.com"}
 # 新增 TCP ping URL，用于IP排查
 tcp_ping_url="https://tcp.ping.pe"
