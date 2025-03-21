@@ -71,7 +71,7 @@ user=$(echo "$result" | awk -F'|' '{print $3}')
 
 # 定义各个按钮的默认URL
 button_url=${BUTTON_URL:-"https://panel10.serv00.com"}
-telegraph_url=${TELEGRAPH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
+telegraph_url=${TELEGRAPH_URL:-"https://status.bwgyhw.cn/"}
 new_user_url=${NEW_USER_URL:-"https://panel10.serv00.com"}
 webssh_url=${WEBSSH_URL:-"https://webssh.dgfghh.ggff.net/#encoding=utf-8&hostname=panel10.serv00.com&username=sdfsfs&password=VjVYTWtyJmxvZF5mb1E3bHlQZig=&command=ss"}
 serv00_url=${SERV00_URL:-"https://serv00.com"}
@@ -178,7 +178,7 @@ reply_markup='{
         {"text": "✨ 搬瓦工IP排查故障 ✨", "url": "'"$tcp_ping_url_encoded"'"}
       ],
       [
-        {"text": "打开Terminal", "url": "'"$telegraph_url_encoded"'"}
+        {"text": "搬瓦工方案库存监控", "url": "'"$telegraph_url_encoded"'"}
       ]
     ]
   }'
