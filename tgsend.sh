@@ -230,22 +230,22 @@ reply_markup='{
         {"text": "汇聚订阅器", "url": "'"$bwh_kvm_url_encoded"'"}
       ],
       [
-        {"text": "✨ 哪吒面板 ✨", "url": "'"$nezha_url_encoded"'"}
+        {"text": "🔮 哪吒面板 🔮", "url": "'"$nezha_url_encoded"'"}
       ],
       [
         {"text": "Serv00 主机状态查询", "url": "'"$tianya_url_encoded"'"}
       ],
       [
-        {"text": "✨ 搬瓦工IP排查故障 ✨", "url": "'"$tcp_ping_url_encoded"'"}
+        {"text": "🔍 搬瓦工IP排查故障 🔍", "url": "'"$tcp_ping_url_encoded"'"}
       ],
       [
         {"text": "搬瓦工方案库存监控", "url": "'"$telegraph_url_encoded"'"}
       ],
       [
-        {"text": "✨ 公益节点池 Github ✨", "url": "'"$server_monitor_url_encoded"'"}
+        {"text": "🌐 公益节点池 Github 🌐", "url": "'"$server_monitor_url_encoded"'"}
       ],
       [
-        {"text": "✨ 公益节点池 FOFA ✨", "url": "'"$traffic_stats_url_encoded"'"}
+        {"text": "🔗 公益节点池 FOFA 🔗", "url": "'"$traffic_stats_url_encoded"'"}
       ],
       [
         {"text": "系统更新", "url": "'"$system_update_url_encoded"'"},
@@ -256,16 +256,16 @@ reply_markup='{
         {"text": "订阅管理", "url": "'"$subscription_manage_url_encoded"'"}
       ],
       [
-        {"text": "✨ 备份恢复 ✨", "url": "'"$backup_restore_url_encoded"'"}
+        {"text": "💾 备份恢复 💾", "url": "'"$backup_restore_url_encoded"'"}
       ],
       [
         {"text": "IP管理", "url": "'"$ip_manage_url_encoded"'"}
       ],
       [
-        {"text": "✨ 资源使用情况 ✨", "url": "'"$resource_usage_url_encoded"'"}
+        {"text": "📊 资源使用情况 📊", "url": "'"$resource_usage_url_encoded"'"}
       ],
       [
-        {"text": "查看服务状态", "url": "'"$service_status_url_encoded"'"}
+        {"text": "📡 查看服务状态 📡", "url": "'"$service_status_url_encoded"'"}
       ]
     ]
   }'
