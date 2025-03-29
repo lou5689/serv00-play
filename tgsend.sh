@@ -239,7 +239,7 @@ reply_markup='{
         {"text": "🔍 搬瓦工IP排查故障 🔍", "url": "'"$tcp_ping_url_encoded"'"}
       ],
       [
-        {"text": "搬瓦工方案库存监控", "url": "'"$telegraph_url_encoded"'"}
+        {"text": "🔮 搬瓦工方案库存监控 🔮", "url": "'"$telegraph_url_encoded"'"}
       ],
       [
         {"text": "🌐 公益节点池 Github 🌐", "url": "'"$server_monitor_url_encoded"'"}
