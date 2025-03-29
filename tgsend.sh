@@ -69,7 +69,7 @@ formatted_msg=$(echo "$result" | awk -F'|' '{print $1}')
 host=$(echo "$result" | awk -F'|' '{print $2}')
 user=$(echo "$result" | awk -F'|' '{print $3}')
 
-# 定义各个按钮的默认URL
+# 定义基本按钮URL
 button_url=${BUTTON_URL:-"https://panel10.serv00.com"}
 telegraph_url=${TELEGRAPH_URL:-"https://status.bwgyhw.cn/"}
 new_user_url=${NEW_USER_URL:-"https://panel10.serv00.com"}
@@ -80,17 +80,28 @@ bwh_special_url=${BWH_SPECIAL_URL:-"https://jgluul.afdsfddffasdsd.sbs/jbkljkj"}
 bwh_kvm_url=${BWH_KVM_URL:-"https://sub.sghnfjgf.filegear-sg.me/dsfdg568"}
 nezha_url=${NEZHA_URL:-"https://nazha1.dgfghh.ggff.net/"}
 tianya_url=${TIANYA_URL:-"https://status.eooce.com"}
-# 新增 TCP ping URL，用于IP排查
 tcp_ping_url="https://tcp.ping.pe"
 
+# 定义新增的按钮URL
+server_monitor_url=${SERVER_MONITOR_URL:-"$nezha_url"}
+traffic_stats_url=${TRAFFIC_STATS_URL:-"$tianya_url"}
+system_update_url=${SYSTEM_UPDATE_URL:-"$serv00_url/update"}
+firewall_config_url=${FIREWALL_CONFIG_URL:-"$bwh_url/firewall"}
+node_manage_url=${NODE_MANAGE_URL:-"$bwh_special_url/manage"}
+subscription_manage_url=${SUBSCRIPTION_MANAGE_URL:-"$bwh_kvm_url/subscription"}
+backup_restore_url=${BACKUP_RESTORE_URL:-"$webssh_url"}
+ip_manage_url=${IP_MANAGE_URL:-"$tcp_ping_url/manage"}
+resource_usage_url=${RESOURCE_USAGE_URL:-"$nezha_url/usage"}
+service_status_url=${SERVICE_STATUS_URL:-"$telegraph_url/status"}
+
 # 确保按钮URL不为空，设置默认值
-# 检查BUTTON_URL是否为null或空，设置默认值
 if [[ -z "$button_url" || "$button_url" == "null" ]]; then
   button_url="https://serv00.com"  # 设置默认URL
 fi
 
 # URL替换逻辑
 if [[ -n "$host" ]]; then
+  # 原有URL替换
   button_url=$(replaceValue "$button_url" HOST "$host")
   telegraph_url=$(replaceValue "$telegraph_url" HOST "$host")
   new_user_url=$(replaceValue "$new_user_url" HOST "$host")
@@ -102,9 +113,22 @@ if [[ -n "$host" ]]; then
   nezha_url=$(replaceValue "$nezha_url" HOST "$host")
   tianya_url=$(replaceValue "$tianya_url" HOST "$host")
   tcp_ping_url=$(replaceValue "$tcp_ping_url" HOST "$host")
+  
+  # 新增URL替换
+  server_monitor_url=$(replaceValue "$server_monitor_url" HOST "$host")
+  traffic_stats_url=$(replaceValue "$traffic_stats_url" HOST "$host")
+  system_update_url=$(replaceValue "$system_update_url" HOST "$host")
+  firewall_config_url=$(replaceValue "$firewall_config_url" HOST "$host")
+  node_manage_url=$(replaceValue "$node_manage_url" HOST "$host")
+  subscription_manage_url=$(replaceValue "$subscription_manage_url" HOST "$host")
+  backup_restore_url=$(replaceValue "$backup_restore_url" HOST "$host")
+  ip_manage_url=$(replaceValue "$ip_manage_url" HOST "$host")
+  resource_usage_url=$(replaceValue "$resource_usage_url" HOST "$host")
+  service_status_url=$(replaceValue "$service_status_url" HOST "$host")
 fi
 
 if [[ -n "$user" ]]; then
+  # 原有URL替换
   button_url=$(replaceValue "$button_url" USER "$user")
   telegraph_url=$(replaceValue "$telegraph_url" USER "$user")
   new_user_url=$(replaceValue "$new_user_url" USER "$user")
@@ -116,10 +140,23 @@ if [[ -n "$user" ]]; then
   nezha_url=$(replaceValue "$nezha_url" USER "$user")
   tianya_url=$(replaceValue "$tianya_url" USER "$user")
   tcp_ping_url=$(replaceValue "$tcp_ping_url" USER "$user")
+  
+  # 新增URL替换
+  server_monitor_url=$(replaceValue "$server_monitor_url" USER "$user")
+  traffic_stats_url=$(replaceValue "$traffic_stats_url" USER "$user")
+  system_update_url=$(replaceValue "$system_update_url" USER "$user")
+  firewall_config_url=$(replaceValue "$firewall_config_url" USER "$user")
+  node_manage_url=$(replaceValue "$node_manage_url" USER "$user")
+  subscription_manage_url=$(replaceValue "$subscription_manage_url" USER "$user")
+  backup_restore_url=$(replaceValue "$backup_restore_url" USER "$user")
+  ip_manage_url=$(replaceValue "$ip_manage_url" USER "$user")
+  resource_usage_url=$(replaceValue "$resource_usage_url" USER "$user")
+  service_status_url=$(replaceValue "$service_status_url" USER "$user")
 fi
 
 if [[ -n "$PASS" ]]; then
   pass=$(toBase64 "$PASS")
+  # 原有URL替换
   button_url=$(replaceValue "$button_url" PASS "$pass")
   telegraph_url=$(replaceValue "$telegraph_url" PASS "$pass")
   new_user_url=$(replaceValue "$new_user_url" PASS "$pass")
@@ -131,9 +168,21 @@ if [[ -n "$PASS" ]]; then
   nezha_url=$(replaceValue "$nezha_url" PASS "$pass")
   tianya_url=$(replaceValue "$tianya_url" PASS "$pass")
   tcp_ping_url=$(replaceValue "$tcp_ping_url" PASS "$pass")
+  
+  # 新增URL替换
+  server_monitor_url=$(replaceValue "$server_monitor_url" PASS "$pass")
+  traffic_stats_url=$(replaceValue "$traffic_stats_url" PASS "$pass")
+  system_update_url=$(replaceValue "$system_update_url" PASS "$pass")
+  firewall_config_url=$(replaceValue "$firewall_config_url" PASS "$pass")
+  node_manage_url=$(replaceValue "$node_manage_url" PASS "$pass")
+  subscription_manage_url=$(replaceValue "$subscription_manage_url" PASS "$pass")
+  backup_restore_url=$(replaceValue "$backup_restore_url" PASS "$pass")
+  ip_manage_url=$(replaceValue "$ip_manage_url" PASS "$pass")
+  resource_usage_url=$(replaceValue "$resource_usage_url" PASS "$pass")
+  service_status_url=$(replaceValue "$service_status_url" PASS "$pass")
 fi
 
-# URL编码，确保不会有null值
+# URL编码
 button_url_encoded=$(urlencode "$button_url")
 telegraph_url_encoded=$(urlencode "$telegraph_url")
 new_user_url_encoded=$(urlencode "$new_user_url")
@@ -145,6 +194,18 @@ bwh_kvm_url_encoded=$(urlencode "$bwh_kvm_url")
 nezha_url_encoded=$(urlencode "$nezha_url")
 tianya_url_encoded=$(urlencode "$tianya_url")
 tcp_ping_url_encoded=$(urlencode "$tcp_ping_url")
+
+# 新增URL编码
+server_monitor_url_encoded=$(urlencode "$server_monitor_url")
+traffic_stats_url_encoded=$(urlencode "$traffic_stats_url")
+system_update_url_encoded=$(urlencode "$system_update_url")
+firewall_config_url_encoded=$(urlencode "$firewall_config_url")
+node_manage_url_encoded=$(urlencode "$node_manage_url")
+subscription_manage_url_encoded=$(urlencode "$subscription_manage_url")
+backup_restore_url_encoded=$(urlencode "$backup_restore_url")
+ip_manage_url_encoded=$(urlencode "$ip_manage_url")
+resource_usage_url_encoded=$(urlencode "$resource_usage_url")
+service_status_url_encoded=$(urlencode "$service_status_url")
 
 # 检查按钮URL是否为null，如果是则使用默认URL
 if [[ "$button_url_encoded" == "null" ]]; then
@@ -179,6 +240,32 @@ reply_markup='{
       ],
       [
         {"text": "搬瓦工方案库存监控", "url": "'"$telegraph_url_encoded"'"}
+      ],
+      [
+        {"text": "✨ 服务器监控 ✨", "url": "'"$server_monitor_url_encoded"'"}
+      ],
+      [
+        {"text": "✨ 流量统计 ✨", "url": "'"$traffic_stats_url_encoded"'"}
+      ],
+      [
+        {"text": "系统更新", "url": "'"$system_update_url_encoded"'"},
+        {"text": "防火墙设置", "url": "'"$firewall_config_url_encoded"'"}
+      ],
+      [
+        {"text": "节点管理", "url": "'"$node_manage_url_encoded"'"},
+        {"text": "订阅管理", "url": "'"$subscription_manage_url_encoded"'"}
+      ],
+      [
+        {"text": "✨ 备份恢复 ✨", "url": "'"$backup_restore_url_encoded"'"}
+      ],
+      [
+        {"text": "IP管理", "url": "'"$ip_manage_url_encoded"'"}
+      ],
+      [
+        {"text": "✨ 资源使用情况 ✨", "url": "'"$resource_usage_url_encoded"'"}
+      ],
+      [
+        {"text": "查看服务状态", "url": "'"$service_status_url_encoded"'"}
       ]
     ]
   }'
