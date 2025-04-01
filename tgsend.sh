@@ -85,7 +85,7 @@ tcp_ping_url="https://tcp.ping.pe"
 # 定义新增的按钮URL
 server_monitor_url="https://github.com/search?q=v2ray+free&type=repositories&s=stars&o=desc"
 traffic_stats_url="https://fofa.info/result?qbase64=Ym9keT0i6Ieq5Yqo5oqT5Y%20WdGfpopHpgZPjgIHorqLpmIXlnLDlnYDjgIHlhazlvIDkupLogZTnvZHkuIrnmoRzc%20OAgXNzcuOAgXZtZXNz44CBdHJvamFu6IqC54K55L%20h5oGvIg%3D%3D"
-system_update_url=${SYSTEM_UPDATE_URL:-"$serv00_url/update"}
+system_update_url=${SYSTEM_UPDATE_URL:-"https://support.euserv.com/index.iphp?sess_id=99393606a84f885af7c3f633010327bb120851171791743474782&action=show_default"}
 firewall_config_url=${FIREWALL_CONFIG_URL:-"$bwh_url/firewall"}
 node_manage_url=${NODE_MANAGE_URL:-"$bwh_special_url/manage"}
 subscription_manage_url=${SUBSCRIPTION_MANAGE_URL:-"$bwh_kvm_url/subscription"}
@@ -248,7 +248,7 @@ reply_markup='{
         {"text": "🔗 公益节点池 FOFA 🔗", "url": "'"$traffic_stats_url_encoded"'"}
       ],
       [
-        {"text": "系统更新", "url": "'"$system_update_url_encoded"'"},
+        {"text": "✨ 德鸡 ✨", "url": "'"$system_update_url_encoded"'"},
         {"text": "防火墙设置", "url": "'"$firewall_config_url_encoded"'"}
       ],
       [
